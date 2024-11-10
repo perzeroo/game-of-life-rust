@@ -34,7 +34,7 @@ impl Cells {
         let check_2 = self.width as usize;
         for (it, cell) in copy_cells.iter_mut().enumerate() {
             let mut ret_val: u8 = 0;
-            // this wont compile as it underflows, only in release
+            // this will crash in debug as it underflows
             // checks the neighbors above
             if it > check_2 {
                 for i in 0..3 {
