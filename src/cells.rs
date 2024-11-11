@@ -19,9 +19,14 @@ impl Cells {
         }
     }
 
+    pub fn clear_cells(&mut self) {
+        self.cells = vec![0u8; self.width as usize * self.height as usize]
+    }
+
     pub fn randomize(&mut self) {
+        self.previous_state_cells = self.cells.to_vec();
         for cell in self.cells.iter_mut() {
-            *cell = if rand() > u32::MAX/2 {0} else {1}
+            *cell = if rand() > u32::MAX/18 {0} else {1}
         }
     }
 

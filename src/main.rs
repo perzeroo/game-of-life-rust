@@ -35,6 +35,9 @@ async fn main() {
         draw_line(w - CROSSHAIR_SIZE, h, w + CROSSHAIR_SIZE, h, 2.0, COLOR);
         draw_line(w, h - CROSSHAIR_SIZE, w, h + CROSSHAIR_SIZE, 2.0, COLOR);
         draw_text(format!("FPS: {}", get_fps()).as_str(), 0., 35., 70., BLUE);
+        draw_text(game.input_state.as_str(), 2., screen_height() - 2., 70., COLOR);
+        draw_text(game.game_state.as_str(), screen_width() - get_text_center(game.game_state.as_str(), None, 70, 1.0, 0.0).x * 2. - 2., screen_height() - 2., 70., COLOR);
+        
         next_frame().await 
     }
 }

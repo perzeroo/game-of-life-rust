@@ -31,6 +31,12 @@ impl Game {
     }
 
     pub fn handle_input(&mut self) {
+        if is_key_pressed(KeyCode::Space) {
+            match self.game_state {
+                state::GameState::Stopped => self.game_state = state::GameState::Running,
+                state::GameState::Running => self.game_state = state::GameState::Stopped,
+            }
+        }
         let (_, mouse_wheel_y) = mouse_wheel();
         let m_wheel_y_d = mouse_wheel_y / 1200.0 * (1.0 * self.renderer.zoom * self.renderer.zoom);
         self.renderer.zoom += m_wheel_y_d;
@@ -52,18 +58,27 @@ impl Game {
 
             state::InputState::Edit => {
                 if is_key_pressed(KeyCode::Tab) {
-                    self.input_state = state::InputState::Edit;
+                    self.input_state = state::InputState::Move;
                 }
             }
         }
 
         if is_key_pressed(KeyCode::R) {
             self.cells.randomize();
+            self.renderer.clear_texture_vec();
+        }
+
+        if is_key_pressed(KeyCode::C) {
+            self.cells.clear_cells();
+            self.renderer.clear_texture_vec();
         }
     }
 
     pub fn tick(&mut self) {
-        self.cells.tick();
+        match self.game_state {
+            state::GameState::Running => self.cells.tick(),
+            state::GameState::Stopped => {},
+        }
         self.renderer.draw_cells(&self.cells);
     }
 }

@@ -19,6 +19,10 @@ impl Renderer {
     pub fn setup(&mut self) {
     }
 
+    pub fn clear_texture_vec(&mut self) {
+        self.texture_vec = vec![0u8; CELLS_WIDTH as usize * CELLS_HEIGHT as usize * 4];
+    }
+
     pub fn draw_cells(&mut self, cells: &cells::Cells) {
         // would like to use a shader for this so I can just pass the array but idk how to do that
         // so we have this... incredibly slow (2048^2 pixels at 30fps)
