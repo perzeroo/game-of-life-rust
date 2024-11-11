@@ -37,8 +37,8 @@ impl Renderer {
 
         clear_background(BLACK);
 
-        let h = VIRTUAL_HEIGHT as f32;
-        let w = VIRTUAL_WIDTH as f32;
+        let h = screen_height() as f32;
+        let w = screen_width() as f32;
         let h_c = CELLS_HEIGHT as f32;
         let w_c = CELLS_WIDTH as f32;
         draw_texture_ex(&texture,
